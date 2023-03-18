@@ -10,9 +10,8 @@ const Message = ({ message }) => {
 
   useEffect(() => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
-  }, []);
+  }, [message]);
 
-  console.log(message);
   return (
     <div
       ref={ref}
@@ -21,7 +20,7 @@ const Message = ({ message }) => {
       <div className="messageInfo">
         <img
           src={
-            message.sendId === currentUser.uid
+            message.senderId === currentUser.uid
               ? currentUser.photoURL
               : data.user.photoURL
           }

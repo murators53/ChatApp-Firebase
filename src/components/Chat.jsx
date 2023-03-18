@@ -7,12 +7,15 @@ import Input from "./Input";
 import { ChatContext } from "../context/ChatContext";
 
 const Chat = () => {
-  const {data} = useContext(ChatContext);
-
+  const { data } = useContext(ChatContext);
+  console.log(data.user);
   return (
     <div className="chat">
       <div className="chatInfo">
-        <span>{data.user?.displayName}</span>
+        <div className="lefttitle">
+          <img src={data.user.photoURL} alt="" />
+          <span>{data.user?.displayName}</span>
+        </div>
         <div className="chatIcons">
           <AiTwotoneVideoCamera style={{ height: "24px", cursor: "pointer" }} />
           <FaUserAlt style={{ height: "24px", cursor: "pointer" }} />

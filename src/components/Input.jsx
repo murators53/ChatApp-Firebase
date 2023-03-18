@@ -21,7 +21,8 @@ const Input = () => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
-  const handleSend = async () => {
+  const handleSend = async (e) => {
+    e.preventDefault();
     if (img) {
       const storageRef = ref(storage, uuid());
 
@@ -74,43 +75,45 @@ const Input = () => {
     setImg(null);
   };
   return (
+      <form action="" onSubmit={handleSend}>
     <div className="input">
-      <input
-        type="text"
-        placeholder="Type something..."
-        onChange={(e) => setText(e.target.value)}
-        value={text}
-      />
-      <div className="send">
-        <IoMdAttach
-          style={{
-            width: "24px",
-            height: "24px",
-            cursor: "pointer",
-            color: "gray",
-          }}
-        />
         <input
-          type="file"
-          style={{ display: "none" }}
-          id="file"
-          onChange={(e) => setImg(e.target.value)}
+          type="text"
+          placeholder="Type something..."
+          onChange={(e) => setText(e.target.value)}
+          value={text}
         />
-        <label htmlFor="file">
-          <RiImageAddLine
+        <div className="send">
+          <IoMdAttach
             style={{
-              marginTop: "5px",
               width: "24px",
               height: "24px",
               cursor: "pointer",
-              padding: "0px",
               color: "gray",
             }}
           />
-        </label>
-        <button onClick={handleSend}>Send</button>
-      </div>
+          <input
+            type="file"
+            style={{ display: "none" }}
+            id="file"
+            onChange={(e) => setImg(e.target.files[0])}
+          />
+          <label htmlFor="file">
+            <RiImageAddLine
+              style={{
+                marginTop: "5px",
+                width: "24px",
+                height: "24px",
+                cursor: "pointer",
+                padding: "0px",
+                color: "gray",
+              }}
+            />
+          </label>
+          <button type="submit">Send</button>
+        </div>
     </div>
+      </form>
   );
 };
 
